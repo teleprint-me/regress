@@ -18,9 +18,10 @@ A simple implementation of linear regression from scratch using pure Python. Thi
 This project provides a basic introduction to key concepts in statistics and regression analysis, such as the **mean**, **variance**, **covariance**, and **R-squared** value, all implemented using Python. The dataset used is hardcoded for simplicity, and the calculations are done manually to emphasize the underlying math.
 
 ## 2. Mean
-The **mean** is the average of a dataset, which provides a central value around which the individual data points tend to cluster. In regression analysis, it helps establish a reference point to understand how the data is distributed.
 
-### Mathematical Definition of Mean ($\mu$ or $\bar{x}$)
+The **mean** is the central value of a dataset, often referred to as the "average." In regression analysis, the mean helps provide a reference point for understanding how the data is distributed, which plays a critical role in determining the best-fit line for the data.
+
+### Mathematical Definition of the Mean ($\mu$ or $\bar{x}$)
 
 The mean of a dataset $x_1, x_2, \dots, x_n$ is given by the formula:
 
@@ -29,19 +30,22 @@ $$
 $$
 
 Where:
-- $\mu$ and $\bar{x}$ represent the mean, or average, of the dataset.
-- $x_i$ represents each data point in the dataset.
-- $n$ is the number of data points — or observations.
-- $\sum$ is the summation operator, meaning we sum all values of $x_i$.
+- $\mu$ or $\bar{x}$ represents the mean (average) of the dataset.
+- $x_i$ is an individual data point in the dataset.
+- $n$ is the number of data points (observations).
+- $\sum$ is the summation symbol, indicating that we sum all values of $x_i$.
 
-This formula calculates the "average" value of the dataset by summing all the data points and dividing by the total number of observations.
+This formula calculates the mean by summing all data points and dividing by the total number of observations. The mean helps establish the **central tendency** of the data—how the data points are distributed around a central value.
 
-### Why the Mean is Important in Regression
-In the context of linear regression, the mean helps define the point through which the best-fit line passes. The best-fit line should pass through the point $(\bar{x}, \bar{y})$, where $\bar{x}$ is the mean of the independent variable and $\bar{y}$ is the mean of the dependent variable. This is why we often calculate the mean of both $x$ and $y$ when determining the slope and intercept of the regression line.
+### Intuition Behind the Mean
 
-### Python Implementation
+The mean provides a single value that summarizes the entire dataset. It is particularly useful in linear regression because the best-fit line (regression line) always passes through the point $(\bar{x}, \bar{y})$, where $\bar{x}$ is the mean of the independent variable $x$ and $\bar{y}$ is the mean of the dependent variable $y$.
 
-In the code, we implement the mean calculation as follows:
+By calculating the mean of both $x$ and $y$, we can anchor the regression line to this point, ensuring that the line represents the data’s central tendency.
+
+### Python Code for Calculating the Mean
+
+The mean calculation in Python directly follows the mathematical formula:
 
 ```python
 def mean(vector: List[Union[int, float]]) -> Union[int, float]:
@@ -50,25 +54,30 @@ def mean(vector: List[Union[int, float]]) -> Union[int, float]:
 ```
 
 #### Explanation
-- **Input**: A list (`vector`) of numerical values (either integers or floats).
-- **Output**: The mean of the list, calculated by summing the values and dividing by the length of the list.
-- **Simplification**: The function calculates $n$ (the number of elements) using `len(vector)`, making it unnecessary to pass it separately.
+- **Input**: A list of numerical values (either integers or floats).
+- **Output**: The mean of the list, calculated by summing all elements and dividing by the number of elements.
+- **Efficiency**: The number of observations $n$ is calculated within the function using `len(vector)`, so it does not need to be passed separately.
 
 #### Example
+
 Given the dataset of incomes:
 
 ```python
 income = [5, 10, 20, 8, 4, 6, 12, 15]
 ```
 
-You can calculate the mean as:
+We can calculate the mean of the incomes as:
 
 ```python
 income_mean = mean(income)
 print(f"Mean of incomes: {income_mean}")
 ```
 
-This will output the average income for the dataset.
+This will output the average income for the dataset, which is the central value around which all other values tend to cluster.
+
+### Conclusion
+
+The **mean** is foundational in both statistics and regression analysis. In regression, it helps to establish the position of the best-fit line, ensuring that the line reflects the central tendency of the data.
 
 ## 3. Variance
 Variance measures the spread of the dataset. It calculates how far each data point is from the mean and gives an idea of the data's distribution.
