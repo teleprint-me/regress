@@ -151,6 +151,25 @@ Variance is a critical measure in regression analysis because it helps determine
 ## 4. Covariance
 Covariance assesses how much two variables change together. Positive covariance indicates that the variables tend to move in the same direction, while negative covariance means they move in opposite directions.
 
+$$Cov(X, Y) = E[[X - E(X)][Y - E(Y)]]$$
+
+Can be simplified to,
+
+$$Cov(X, Y) = E(XY) - E(X) \cdot E(Y)$$
+
+through the use of the distributive property and then combining like terms.
+
+```python
+def covariance(
+    x: List[Union[int, float]],
+    y: List[Union[int, float]],
+    x_avg: float,
+    y_avg: float,
+) -> float:
+    """Calculates the covariance of x and y."""
+    return sum((x_i - x_avg) * (y_i - y_avg) for x_i, y_i in zip(x, y)) / len(zip(x, y))
+```
+
 ## 5. Regression
 Linear regression finds the line of best fit for a set of data points by minimizing the sum of squared errors. The line is represented by the equation:
 
@@ -160,12 +179,12 @@ Where:
 - $m$ is the slope
 - $b$ is the intercept
 
-## 6. Coefficient of Determination ($R^2$)
-The $R^2$ value measures how well the regression line fits the data. It is calculated as:
+## 6. Coefficient of Determination ($r^2$)
+The $r^2$ value measures how well the regression line fits the data. It is calculated as:
 
-$$ R^2 = 1 - \frac{SS_{residual}}{SS_{total}} $$
+$$ r^2 = 1 - \frac{SE_{residual}}{SE_{total}} $$
 
-An $R^2$ value close to 1 indicates a strong fit.
+An $r^2$ value close to 1 indicates a strong fit.
 
 ## 7. Prediction
 Once the regression line is calculated, it can be used to predict values of the dependent variable based on the independent variable.
