@@ -99,6 +99,20 @@ The **mean** is foundational in both statistics and regression analysis. In regr
 ## 3. Variance
 Variance measures the spread of the dataset. It calculates how far each data point is from the mean and gives an idea of the data's distribution.
 
+The variance ($\sigma^2$) is the average of these squared differences:
+
+$$\text{Var}(x) = \sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n}$$
+
+This gives a measure of how spread out the data is around the mean. A higher variance indicates more spread, while a lower variance indicates that the data is clustered more closely around the mean.
+
+```python
+def var(
+    x: List[Union[int, float]], avg: Union[int, float], n: int
+) -> float:
+    """Calculates the variance of a list."""
+    return sum((x_i - avg) ** 2 for x_i in x) / n
+```
+
 ## 4. Covariance
 Covariance assesses how much two variables change together. Positive covariance indicates that the variables tend to move in the same direction, while negative covariance means they move in opposite directions.
 
