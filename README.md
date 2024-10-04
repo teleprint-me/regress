@@ -218,6 +218,10 @@ print(f"Covariance of income and sales: {income_sales_cov}")
 
 This will output the covariance between the two datasets, indicating the direction of the relationship between income and pizza sales.
 
+### Conclusion:
+
+Covariance helps quantify the relationship between two variables in terms of their directional movement. In linear regression, it plays a vital role in understanding how the independent and dependent variables are related, ultimately influencing the calculation of the slope in the regression equation.
+
 ## 5. Regression
 Linear regression finds the line of best fit for a set of data points by minimizing the sum of squared errors. The line is represented by the equation:
 
