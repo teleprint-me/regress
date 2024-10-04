@@ -14,11 +14,9 @@ def mean(vector: List[Union[int, float]]) -> Union[int, float]:
     return sum(vector) / len(vector)
 
 
-def calculate_variance(
-    x: List[Union[int, float]], avg: Union[int, float], n: int
-) -> float:
+def variance(x: List[Union[int, float]], avg: Union[int, float]) -> float:
     """Calculates the variance of a list."""
-    return sum((x_i - avg) ** 2 for x_i in x) / n
+    return sum((x_i - avg) ** 2 for x_i in x) / len(x)
 
 
 def calculate_covariance(
