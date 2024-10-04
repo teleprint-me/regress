@@ -26,12 +26,12 @@ Where:
 - $m$ is the slope
 - $b$ is the intercept
 
-### 5. Coefficient of Determination (\(R^2\))
-The \(R^2\) value measures how well the regression line fits the data. It is calculated as:
+### 5. Coefficient of Determination ($R^2$)
+The $R^2$ value measures how well the regression line fits the data. It is calculated as:
 
 $$ R^2 = 1 - \frac{SS_{residual}}{SS_{total}} $$
 
-An \(R^2\) value close to 1 indicates a strong fit.
+An $R^2$ value close to 1 indicates a strong fit.
 
 ### 6. Prediction
 Once the regression line is calculated, it can be used to predict values of the dependent variable based on the independent variable.
@@ -49,7 +49,7 @@ python -m linear.regression
 This will output:
 - The slope ($m$) and intercept ($b$),
 - Predicted values based on the regression line,
-- The \(R^2\) value to assess the accuracy of the model.
+- The $R^2$ value to assess the accuracy of the model.
 
 ## Resources
 
