@@ -17,6 +17,23 @@ A simple implementation of linear regression from scratch using pure Python. Thi
 
 This project provides a basic introduction to key concepts in statistics and regression analysis, such as the **mean**, **variance**, **covariance**, and **R-squared** value, all implemented using Python. The dataset used is hardcoded for simplicity, and the calculations are done manually to emphasize the underlying math.
 
+### Dataset
+
+The dataset consists of observations of average income and total pizza sales for a 1-month period across eight different towns:
+
+| Town | Income (thousands of dollars) | Pizza Sales (in thousands) |
+| ---  | ---                           | ---                        |
+| 1    | 5                             | 27                         |
+| 2    | 10                            | 46                         |
+| 3    | 20                            | 73                         |
+| 4    | 8                             | 40                         |
+| 5    | 4                             | 30                         |
+| 6    | 6                             | 28                         |
+| 7    | 12                            | 46                         |
+| 8    | 15                            | 59                         |
+
+The **income** represents the independent variable (input), and the **pizza sales** represent the dependent variable (output) that we aim to predict using linear regression.
+
 ## 2. Mean
 
 The **mean** is the central value of a dataset, often referred to as the "average." In regression analysis, the mean helps provide a reference point for understanding how the data is distributed, which plays a critical role in determining the best-fit line for the data.
