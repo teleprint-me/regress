@@ -1,8 +1,23 @@
 """
-Script: nn.regress
+Script: linear.regression
 
 A simple example of linear regression in pure python completely from scratch.
 """
+
+from typing import List, Union
+
+
+def mean():
+    pass
+
+
+def variance():
+    pass
+
+
+def calculate_average(vector: List[Union[int, float]], n: int) -> Union[int, float]:
+    return sum(vector) / n
+
 
 # Pizza sales dataset
 income = [5, 10, 20, 8, 4, 6, 12, 15]
