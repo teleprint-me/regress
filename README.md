@@ -97,21 +97,56 @@ This will output the average income for the dataset, which is the central value 
 The **mean** is foundational in both statistics and regression analysis. In regression, it helps to establish the position of the best-fit line, ensuring that the line reflects the central tendency of the data.
 
 ## 3. Variance
-Variance measures the spread of the dataset. It calculates how far each data point is from the mean and gives an idea of the data's distribution.
+Variance measures the spread of the dataset. It quantifies how much the individual data points deviate from the mean, providing a sense of how "spread out" or "close together" the data points are.
 
-The variance ($\sigma^2$) is the average of these squared differences:
+### Mathematical Definition of Variance ($\sigma^2$)
 
-$$\text{Var}(x) = \sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n}$$
+The variance of a dataset $x_1, x_2, \dots, x_n$ is given by:
 
-This gives a measure of how spread out the data is around the mean. A higher variance indicates more spread, while a lower variance indicates that the data is clustered more closely around the mean.
+$$
+\text{Var}(x) = \sigma^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n}
+$$
+
+Where:
+- $x_i$ is an individual data point in the dataset.
+- $\bar{x}$ is the mean of the dataset.
+- $n$ is the number of data points.
+- $\sum$ represents the summation over all the data points.
+
+This formula calculates the variance by summing the squared differences between each data point and the mean, and then dividing by the number of data points. A higher variance indicates that the data points are more spread out, while a lower variance means that the data is clustered more closely around the mean.
+
+### Python Implementation
+
+To compute the variance, we implement the following function:
 
 ```python
-def var(
-    x: List[Union[int, float]], avg: Union[int, float], n: int
-) -> float:
+def variance(x: List[Union[int, float]], avg: Union[int, float]) -> float:
     """Calculates the variance of a list."""
-    return sum((x_i - avg) ** 2 for x_i in x) / n
+    return sum((x_i - avg) ** 2 for x_i in x) / len(x)
 ```
+
+#### Explanation
+- **Input**: 
+  - `x`: A list of numerical values (either integers or floats).
+  - `avg`: The mean of the list, which should be precomputed.
+- **Output**: The variance of the dataset, which indicates how far the values deviate from the mean.
+- **Efficiency**: The function automatically calculates the number of data points $n$ using `len(x)`, simplifying the input.
+
+#### Example
+Given the same dataset of incomes:
+
+```python
+income = [5, 10, 20, 8, 4, 6, 12, 15]
+income_mean = mean(income)
+income_variance = variance(income, income_mean)
+print(f"Variance of incomes: {income_variance}")
+```
+
+This will output the variance of the incomes, providing insight into how spread out the income values are relative to the mean.
+
+### Conclusion
+
+Variance is a critical measure in regression analysis because it helps determine the spread of the data. In linear regression, understanding the variance of both the independent and dependent variables helps in modeling the relationship between them.
 
 ## 4. Covariance
 Covariance assesses how much two variables change together. Positive covariance indicates that the variables tend to move in the same direction, while negative covariance means they move in opposite directions.
