@@ -149,26 +149,33 @@ This will output the variance of the incomes, providing insight into how spread 
 Variance is a critical measure in regression analysis because it helps determine the spread of the data. In linear regression, understanding the variance of both the independent and dependent variables helps in modeling the relationship between them.
 
 ## 4. Covariance
-Covariance assesses how much two variables change together. Positive covariance indicates that the variables tend to move in the same direction, while negative covariance means they move in opposite directions.
 
-$$Cov(X, Y) = E[[X - E(X)][Y - E(Y)]]$$
+Covariance measures how much two variables change together. It indicates the direction of the linear relationship between two variables. If the covariance is positive, it means that as one variable increases, the other tends to increase as well (and vice versa). A negative covariance indicates that as one variable increases, the other tends to decrease.
 
-Can be simplified to,
+### **Mathematical Definition of Covariance**:
 
-$$Cov(X, Y) = E(XY) - E(X) \cdot E(Y)$$
+The covariance between two variables $X$ and $Y$ is given by:
 
-through the use of the distributive property and then combining like terms.
+$$\text{Cov}(X, Y) = E[(X - E(X))(Y - E(Y))]$$
 
-```python
-def covariance(
-    x: List[Union[int, float]],
-    y: List[Union[int, float]],
-    x_avg: float,
-    y_avg: float,
-) -> float:
-    """Calculates the covariance of x and y."""
-    return sum((x_i - x_avg) * (y_i - y_avg) for x_i, y_i in zip(x, y)) / len(zip(x, y))
-```
+Where:
+- $E(X)$ is the expected value (mean) of $X$,
+- $E(Y)$ is the expected value (mean) of $Y$,
+- $E(XY)$ is the expected value of the product $X \cdot Y$.
+
+Using the distributive property and combining terms, we can simplify the formula to:
+
+$$\text{Cov}(X, Y) = E(XY) - E(X) \cdot E(Y)$$
+
+Where:
+- $E(XY)$ represents the mean of the product of $X$ and $Y$,
+- $E(X) \cdot E(Y)$ is the product of the means of $X$ and $Y$.
+
+### **Interpreting Covariance**:
+- **Positive Covariance**: $X$ and $Y$ move in the same direction. When one increases, so does the other.
+- **Negative Covariance**: $X$ and $Y$ move in opposite directions. When one increases, the other decreases.
+
+Covariance is an important metric in regression analysis, as it helps in understanding how the independent variable $X$ and dependent variable $Y$ are related.
 
 ## 5. Regression
 Linear regression finds the line of best fit for a set of data points by minimizing the sum of squared errors. The line is represented by the equation:
