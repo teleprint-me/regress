@@ -15,7 +15,7 @@ A simple implementation of linear regression from scratch using pure Python. Thi
 
 ## 1. Overview
 
-This project provides a basic introduction to key concepts in statistics and regression analysis, such as the **mean**, **variance**, **covariance**, and **R-squared** value, all implemented using Python. The dataset used is hardcoded for simplicity, and the calculations are done manually to emphasize the underlying math.
+This project provides a basic introduction to key concepts in statistics and regression analysis, such as the **mean**, **variance**, **covariance**, and **r-squared** value, all implemented using Python. The dataset used is hardcoded for simplicity, and the calculations are done manually to emphasize the underlying math.
 
 ### Dataset
 
@@ -152,7 +152,7 @@ Variance is a critical measure in regression analysis because it helps determine
 
 Covariance measures how much two variables change together. It indicates the direction of the linear relationship between two variables. If the covariance is positive, it means that as one variable increases, the other tends to increase as well (and vice versa). A negative covariance indicates that as one variable increases, the other tends to decrease.
 
-### **Mathematical Definition of Covariance**:
+### Mathematical Definition of Covariance
 
 The covariance between two variables $X$ and $Y$ is given by:
 
@@ -171,11 +171,52 @@ Where:
 - $E(XY)$ represents the mean of the product of $X$ and $Y$,
 - $E(X) \cdot E(Y)$ is the product of the means of $X$ and $Y$.
 
-### **Interpreting Covariance**:
+### Interpreting Covariance
 - **Positive Covariance**: $X$ and $Y$ move in the same direction. When one increases, so does the other.
 - **Negative Covariance**: $X$ and $Y$ move in opposite directions. When one increases, the other decreases.
 
 Covariance is an important metric in regression analysis, as it helps in understanding how the independent variable $X$ and dependent variable $Y$ are related.
+
+### Python Implementation
+
+To compute the covariance between two datasets $x$ and $y$, we use the following function:
+
+```python
+def covariance(
+    x: List[Union[int, float]],
+    y: List[Union[int, float]],
+    x_avg: float,
+    y_avg: float,
+) -> float:
+    """Calculates the covariance of x and y."""
+    return sum((x_i - x_avg) * (y_i - y_avg) for x_i, y_i in zip(x, y)) / len(x)
+```
+
+#### Explanation
+- **Input**: 
+  - `x`: A list of numerical values for the first variable (e.g., income).
+  - `y`: A list of numerical values for the second variable (e.g., pizza sales).
+  - `x_avg`: The mean of the list `x`.
+  - `y_avg`: The mean of the list `y`.
+- **Output**: The covariance between `x` and `y`.
+- **Efficiency**: The function uses `zip(x, y)` to iterate through both lists simultaneously, calculating the covariance as the average of the product of their deviations from their means.
+
+#### Example
+
+Given the datasets for income and pizza sales:
+
+```python
+income = [5, 10, 20, 8, 4, 6, 12, 15]
+sales = [27, 46, 73, 40, 30, 28, 46, 59]
+
+income_mean = mean(income)
+sales_mean = mean(sales)
+
+income_sales_cov = covariance(income, sales, income_mean, sales_mean)
+print(f"Covariance of income and sales: {income_sales_cov}")
+```
+
+This will output the covariance between the two datasets, indicating the direction of the relationship between income and pizza sales.
 
 ## 5. Regression
 Linear regression finds the line of best fit for a set of data points by minimizing the sum of squared errors. The line is represented by the equation:

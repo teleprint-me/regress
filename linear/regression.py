@@ -19,15 +19,14 @@ def variance(x: List[Union[int, float]], avg: Union[int, float]) -> float:
     return sum((x_i - avg) ** 2 for x_i in x) / len(x)
 
 
-def calculate_covariance(
+def covariance(
     x: List[Union[int, float]],
     y: List[Union[int, float]],
     x_avg: float,
     y_avg: float,
-    n: int,
 ) -> float:
     """Calculates the covariance of x and y."""
-    return sum((x_i - x_avg) * (y_i - y_avg) for x_i, y_i in zip(x, y)) / n
+    return sum((x_i - x_avg) * (y_i - y_avg) for x_i, y_i in zip(x, y)) / len(x)
 
 
 def linear_regression(x: List[Union[int, float]], y: List[Union[int, float]], n: int):
