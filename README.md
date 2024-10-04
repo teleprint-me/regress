@@ -148,6 +148,62 @@ This will output the variance of the incomes, providing insight into how spread 
 
 Variance is a critical measure in regression analysis because it helps determine the spread of the data. In linear regression, understanding the variance of both the independent and dependent variables helps in modeling the relationship between them.
 
+## 4. Expectation
+
+**Expectation** (also known as the **expected value** or **mean** in some contexts) is a fundamental concept in probability and statistics. It represents the average or mean value of a random variable, weighted by the probabilities of the different outcomes. Expectation helps us summarize the central tendency of a random variable's probability distribution.
+
+### Mathematical Definition of Expectation ($E(X)$)
+
+The expectation of a discrete random variable $X$ is calculated by summing all possible values of $X$, each weighted by its corresponding probability:
+
+$$
+E(X) = \sum_{i=1}^{n} p_i \cdot x_i
+$$
+
+Where:
+- $x_i$ is a possible value that the random variable $X$ can take.
+- $p_i$ is the probability that $X$ takes the value $x_i$.
+- $\sum$ indicates the summation of all possible outcomes.
+
+### Intuition Behind Expectation
+
+Expectation can be thought of as the "long-run average" of a random variable if the process that generates it is repeated many times. For example, if we repeatedly toss a weighted coin, the expectation helps us understand what the average result would be over time, based on the probabilities of heads and tails.
+
+In the context of linear regression, the expectation gives us a way to handle variables that vary randomly, helping us define relationships like covariance between two random variables.
+
+### Python Code for Calculating Expectation
+
+Here’s how you might implement the expectation for a discrete set of values:
+
+```python
+def expectation(values: List[Union[int, float]], probabilities: List[float]) -> float:
+    """Calculates the expectation of a random variable."""
+    return sum(value * prob for value, prob in zip(values, probabilities))
+```
+
+#### Explanation:
+- **Input**:
+  - `values`: A list of possible outcomes (e.g., values the random variable can take).
+  - `probabilities`: A list of corresponding probabilities for each outcome.
+- **Output**: The expected value of the random variable.
+- **Efficiency**: Uses `zip` to pair values with their probabilities and compute the weighted sum.
+
+#### Example:
+
+```python
+outcomes = [1, 2, 3, 4, 5]
+probabilities = [0.1, 0.2, 0.3, 0.2, 0.2]
+
+expected_value = expectation(outcomes, probabilities)
+print(f"Expected value: {expected_value}")
+```
+
+This will calculate the expectation based on the outcomes and their probabilities, giving you an understanding of the average result.
+
+### Conclusion
+
+The **expectation** is essential for understanding many statistical concepts, including covariance, which measures how two variables change together. It is often used in regression analysis to summarize how data is distributed and to explore relationships between variables.
+
 ## 4. Covariance
 
 Covariance measures how much two variables change together. It indicates the direction of the linear relationship between two variables. If the covariance is positive, it means that as one variable increases, the other tends to increase as well (and vice versa). A negative covariance indicates that as one variable increases, the other tends to decrease.
