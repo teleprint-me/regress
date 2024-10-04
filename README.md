@@ -2,6 +2,17 @@
 
 A simple implementation of linear regression from scratch using pure Python. This project walks through the fundamental concepts behind linear regression and demonstrates how to implement it without relying on third-party libraries.
 
+## Table of Contents
+1. Overview
+2. Mean
+3. Variance
+4. Covariance
+5. Regression
+6. Coefficient of Determination
+7. Prediction
+8. How to Run
+9. Resources
+
 ## 1. Overview
 
 This project provides a basic introduction to key concepts in statistics and regression analysis, such as the **mean**, **variance**, **covariance**, and **R-squared** value, all implemented using Python. The dataset used is hardcoded for simplicity, and the calculations are done manually to emphasize the underlying math.
