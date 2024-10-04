@@ -7,9 +7,9 @@ A simple example of linear regression in pure python completely from scratch.
 from typing import List, Union
 
 
-def calculate_average(x: List[Union[int, float]], n: int) -> Union[int, float]:
-    """Calculates the average of a list."""
-    return sum(x) / n
+def mean(vector: List[Union[int, float]]) -> Union[int, float]:
+    """Calculates the mean (average) of a list."""
+    return sum(vector) / len(vector)
 
 
 def calculate_variance(
@@ -32,12 +32,12 @@ def calculate_covariance(
 
 def linear_regression(x: List[Union[int, float]], y: List[Union[int, float]], n: int):
     """Calculates the slope (m) and intercept (b) for linear regression."""
-    x_avg = calculate_average(x, n)
-    y_avg = calculate_average(y, n)
+    x_avg = mean(x)
+    y_avg = mean(y)
 
     # Calculate x^2 and x*y for averages
-    x_squared_avg = calculate_average([x_i**2 for x_i in x], n)
-    xy_avg = calculate_average([x_i * y_i for x_i, y_i in zip(x, y)], n)
+    x_squared_avg = mean([x_i**2 for x_i in x])
+    xy_avg = mean([x_i * y_i for x_i, y_i in zip(x, y)])
 
     # Calculate slope (m) and intercept (b)
     m_hat = (xy_avg - x_avg * y_avg) / (x_squared_avg - x_avg**2)
@@ -80,7 +80,7 @@ def main():
     print(f"Predicted sales: {predicted_sales}")
 
     # Calculate R-squared value
-    y_avg = calculate_average(sales, n)
+    y_avg = mean(sales)
     # Number of variations in y that can be explained by variations in x
     r2 = r_squared(sales, predicted_sales, y_avg, n)
     print(f"R-squared: {r2}")
