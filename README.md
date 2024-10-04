@@ -143,3 +143,4 @@ This will output:
 - [Covariance](https://byjus.com/maths/covariance/)
 - [Regression](https://stats.libretexts.org/Courses/Las_Positas_College/Math_40%3A_Statistics_and_Probability/10%3A_Correlation_and_Regression/10.02%3A_The_Regression_Equation)
 - [Prediction](https://stats.libretexts.org/Courses/Las_Positas_College/Math_40%3A_Statistics_and_Probability/10%3A_Correlation_and_Regression/10.02%3A_The_Regression_Equation/10.2.01%3A_Prediction)
+- [Statistics: The Easy Way](https://www.amazon.com/Statistics-Easy-Way/dp/0812093925)
