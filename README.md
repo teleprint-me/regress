@@ -9,13 +9,26 @@ This project provides a basic introduction to key concepts in statistics and reg
 ## Sections
 
 ### 1. Mean
-The mean is the average of the dataset, which provides a central value to compare individual data points.
+The **mean** is the average of a dataset, which provides a central value around which the individual data points tend to cluster. In regression analysis, it helps establish a reference point to understand how the data is distributed.
 
-**Mean ($\mu$) or $\bar{x}$)**:
+#### **Mathematical Definition of Mean ($\mu$ or $\bar{x}$):**
 
-$$\mu = \bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n} = \frac{\sum_{i=1}^{n} x_i}{n}$$
+The mean of a dataset $x_1, x_2, \dots, x_n$ is given by the formula:
 
-This represents the central value of a given dataset.
+$$
+\mu = \bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n} = \frac{\sum_{i=1}^{n} x_i}{n}
+$$
+
+Where:
+- $\mu$ and $\bar{x}$ represent the mean, or average, of the dataset.
+- $x_i$ represents each data point in the dataset.
+- $n$ is the number of data points — or observations.
+- $\sum$ is the summation operator, meaning we sum all values of $x_i$.
+
+This formula calculates the "average" value of the dataset by summing all the data points and dividing by the total number of observations.
+
+#### **Why the Mean is Important in Regression**:
+In the context of linear regression, the mean helps define the point through which the best-fit line passes. The best-fit line should pass through the point $(\bar{x}, \bar{y})$, where $\bar{x}$ is the mean of the independent variable and $\bar{y}$ is the mean of the dependent variable. This is why we often calculate the mean of both $x$ and $y$ when determining the slope and intercept of the regression line.
 
 ### 2. Variance
 Variance measures the spread of the dataset. It calculates how far each data point is from the mean and gives an idea of the data's distribution.
