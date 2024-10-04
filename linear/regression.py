@@ -62,24 +62,29 @@ def r_squared(
     return 1 - (ss_residual / ss_total)
 
 
-# Pizza sales dataset
-income = [5, 10, 20, 8, 4, 6, 12, 15]
-sales = [27, 46, 73, 40, 30, 28, 46, 59]
+def main():
+    # Pizza sales dataset
+    income = [5, 10, 20, 8, 4, 6, 12, 15]
+    sales = [27, 46, 73, 40, 30, 28, 46, 59]
 
-# Number of observations
-n = len(income)
+    # Number of observations
+    n = len(income)
 
-# Linear regression calculation
-m_hat, b_hat = linear_regression(income, sales, n)
+    # Linear regression calculation
+    m_hat, b_hat = linear_regression(income, sales, n)
 
-print(f"Slope (m): {m_hat}, Intercept (b): {b_hat}")
+    print(f"Slope (m): {m_hat}, Intercept (b): {b_hat}")
 
-# Predicted values
-predicted_sales = predict(income, m_hat, b_hat)
-print(f"Predicted sales: {predicted_sales}")
+    # Predicted values
+    predicted_sales = predict(income, m_hat, b_hat)
+    print(f"Predicted sales: {predicted_sales}")
 
-# Calculate R-squared value
-y_avg = calculate_average(sales, n)
-# Number of variations in y that can be explained by variations in x
-r2 = r_squared(sales, predicted_sales, y_avg, n)
-print(f"R-squared: {r2}")
+    # Calculate R-squared value
+    y_avg = calculate_average(sales, n)
+    # Number of variations in y that can be explained by variations in x
+    r2 = r_squared(sales, predicted_sales, y_avg, n)
+    print(f"R-squared: {r2}")
+
+
+if __name__ == "__main__":
+    main()
