@@ -1,4 +1,6 @@
 """
+Copyright (C) 2024 Austin Berrio
+
 Script: linear.regression
 
 A simple example of linear regression in pure python completely from scratch.
