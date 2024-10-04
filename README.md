@@ -11,6 +11,12 @@ This project provides a basic introduction to key concepts in statistics and reg
 ### 1. Mean
 The mean is the average of the dataset, which provides a central value to compare individual data points.
 
+**Mean ($\mu$) or $\bar{x}$)**:
+
+$$\mu = \bar{x} = \frac{x_1 + x_2 + \dots + x_n}{n} = \frac{\sum_{i=1}^{n} x_i}{n}$$
+
+This represents the central value of a given dataset.
+
 ### 2. Variance
 Variance measures the spread of the dataset. It calculates how far each data point is from the mean and gives an idea of the data's distribution.
 
