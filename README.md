@@ -39,6 +39,37 @@ This formula calculates the "average" value of the dataset by summing all the da
 ### Why the Mean is Important in Regression
 In the context of linear regression, the mean helps define the point through which the best-fit line passes. The best-fit line should pass through the point $(\bar{x}, \bar{y})$, where $\bar{x}$ is the mean of the independent variable and $\bar{y}$ is the mean of the dependent variable. This is why we often calculate the mean of both $x$ and $y$ when determining the slope and intercept of the regression line.
 
+### Python Implementation
+
+In the code, we implement the mean calculation as follows:
+
+```python
+def mean(vector: List[Union[int, float]]) -> Union[int, float]:
+    """Calculates the mean (average) of a list."""
+    return sum(vector) / len(vector)
+```
+
+#### Explanation
+- **Input**: A list (`vector`) of numerical values (either integers or floats).
+- **Output**: The mean of the list, calculated by summing the values and dividing by the length of the list.
+- **Simplification**: The function calculates $n$ (the number of elements) using `len(vector)`, making it unnecessary to pass it separately.
+
+#### Example
+Given the dataset of incomes:
+
+```python
+income = [5, 10, 20, 8, 4, 6, 12, 15]
+```
+
+You can calculate the mean as:
+
+```python
+income_mean = mean(income)
+print(f"Mean of incomes: {income_mean}")
+```
+
+This will output the average income for the dataset.
+
 ## 3. Variance
 Variance measures the spread of the dataset. It calculates how far each data point is from the mean and gives an idea of the data's distribution.
 
