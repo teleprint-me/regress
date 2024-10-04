@@ -19,6 +19,11 @@ def variance(x: List[Union[int, float]], avg: Union[int, float]) -> float:
     return sum((x_i - avg) ** 2 for x_i in x) / len(x)
 
 
+def expectation(values: List[Union[int, float]], probabilities: List[float]) -> float:
+    """Calculates the expectation of a random variable."""
+    return sum(value * prob for value, prob in zip(values, probabilities))
+
+
 def covariance(
     x: List[Union[int, float]],
     y: List[Union[int, float]],
