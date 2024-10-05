@@ -4,8 +4,6 @@ Copyright (C) 2024 Austin Berrio
 Script: linear.roll
 
 Generate a set of values for generating linear sequences with replacement
-
-Generate a distribution set within a given range
 """
 
 from argparse import ArgumentParser, Namespace
