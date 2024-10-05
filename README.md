@@ -151,7 +151,55 @@ This will output the variance of the incomes, providing insight into how spread 
 
 Variance is a critical measure in regression analysis because it helps determine the spread of the data. In linear regression, understanding the variance of both the independent and dependent variables helps in modeling the relationship between them.
 
-## 4. Expectation
+## 4. Event
+
+An **event** is a specific outcome or a set of outcomes from a sample space. In probability theory, events are subsets of the sample space, which is the set of all possible outcomes of a random experiment. Understanding events is fundamental to calculating probabilities and analyzing data.
+
+### Sample Space and Events
+
+The **sample space** (denoted $S$) is the set of all possible outcomes in a given experiment. An **event** is any subset of this sample space. For example, when rolling a six-sided die, the sample space is:
+
+$$S = \{1, 2, 3, 4, 5, 6\}$$
+
+Each outcome of this sample space (i.e., rolling a specific number) is considered an **element** of the sample space and can be treated as an event.
+
+$$s \in S$$
+
+We can define the cardinality as the **size** of the space.
+
+$$|S|$$
+
+### Example of an Event
+
+Suppose we are interested in the event of rolling a 3. In this case, the event $A$ is defined as:
+
+$$A = \{3\}$$
+
+This is a subset of the sample space, containing just one element (rolling a 3). The number of ways this event can occur is $N(A) = 1$, since there is exactly one way to roll a 3.
+
+### Probability of an Event
+
+The probability of an event is calculated by dividing the number of favorable outcomes by the total number of possible outcomes in the sample space:
+
+$$Pr(A) = \frac{N(A)}{N(S)}$$
+
+Where:
+- $N(A)$ is the number of favorable outcomes (the number of ways the event $A$ can occur),
+- $N(S)$ is the total number of possible outcomes in the sample space.
+
+For example, the probability of rolling a 3 on a six-sided die is:
+
+$$Pr(3) = \frac{1}{6}$$
+
+This is because there is 1 favorable outcome (rolling a 3) out of 6 possible outcomes in total.
+
+## 5. Probability
+
+**Probability** is the measure of the likelihood that an event will occur. It quantifies the uncertainty of different outcomes in an experiment or random process. The probability of an event is a number between 0 and 1, where:
+- 0 means the event will not occur, and 
+- 1 means the event will definitely occur.
+
+## 6. Expectation
 
 **Expectation** (also known as the **expected value** or **mean** in some contexts) is a fundamental concept in probability and statistics. It represents the average or mean value of a random variable, weighted by the probabilities of the different outcomes. Expectation helps us summarize the central tendency of a random variable's probability distribution.
 
