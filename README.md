@@ -428,7 +428,10 @@ Where:
 The slope $\hat{m}$ and intercept $\hat{b}$ can be calculated using the following formulas:
 
 $$
-\hat{m} = \frac{\bar{xy} - \bar{x} \cdot \bar{y}}{\bar{x^2} - \bar{x}^2} \\
+\hat{m} = \frac{\bar{xy} - \bar{x} \cdot \bar{y}}{\bar{x^2} - \bar{x}^2}
+$$
+
+$$
 \hat{b} = \bar{y} - \hat{m} \cdot \bar{x}
 $$
 
