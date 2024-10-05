@@ -16,15 +16,28 @@ def dice_roll() -> int:
 
 def get_args() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("-s", "--seed", default=42, help="Default to Douglas Adams.")
+    parser.add_argument(
+        "-s",
+        "--seed",
+        type=int,
+        default=42,
+        help="See Douglas Adams. Defaults to 42.",
+    )
+    parser.add_argument(
+        "-d",
+        "--deterministic",
+        action="store_true",
+        help="Enable deterministic output. Default is False.",
+    )
     return parser.parse_args()
 
 
 def main():
     # Get user parameters
     args = get_args()
-    # Set a seed for deterministic output
-    seed(args.seed)
+    # Set a seed for deterministic output if the flag is set
+    if args.deterministic:
+        seed(args.seed)
     # Create a sample size of 10
     for i in range(10):
         print(f"i: {i}, roll: {dice_roll()}")
