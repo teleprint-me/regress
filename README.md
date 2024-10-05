@@ -153,7 +153,7 @@ Variance is a critical measure in regression analysis because it helps determine
 
 ## 4. Event
 
-An **event** is a specific outcome or a set of outcomes from a sample space. In probability theory, events are subsets of the sample space, which is the set of all possible outcomes of a random experiment. Understanding events is fundamental to calculating probabilities and analyzing data.
+An **event** is a specific outcome or a set of outcomes from a sample space. In probability theory, events are subsets of the sample space, which contains all possible outcomes of a random experiment. Understanding events is essential to calculating probabilities and analyzing data.
 
 ### Sample Space and Events
 
@@ -161,13 +161,13 @@ The **sample space** (denoted $S$) is the set of all possible outcomes in a give
 
 $$S = \{1, 2, 3, 4, 5, 6\}$$
 
-Each outcome of this sample space (i.e., rolling a specific number) is considered an **element** of the sample space and can be treated as an event.
+Each outcome in this sample space (i.e., rolling a specific number) is considered an **element** of the sample space and can be treated as an event:
 
 $$s \in S$$
 
-We can define the cardinality as the **size** of the space.
+The **cardinality** of the sample space, or the number of possible outcomes, is represented by $|S|$. For a six-sided die, the cardinality is:
 
-$$|S|$$
+$$|S| = 6$$
 
 ### Example of an Event
 
@@ -225,6 +225,59 @@ An **event** is a subset of the sample space, representing one or more possible 
 **Probability** is the measure of the likelihood that an event will occur. It quantifies the uncertainty of different outcomes in an experiment or random process. The probability of an event is a number between 0 and 1, where:
 - 0 means the event will not occur, and 
 - 1 means the event will definitely occur.
+
+### Mathematical Definition of Probability
+
+The probability of an event $A$, denoted $Pr(A)$, is defined as:
+
+$$Pr(A) = \frac{N(A)}{N(S)}$$
+
+Where:
+- $N(A)$ is the number of favorable outcomes (the number of ways event $A$ can occur),
+- $N(S)$ is the total number of possible outcomes in the sample space $S$.
+
+For example, when flipping a fair coin:
+- The probability of getting heads is $Pr(\text{Heads}) = \frac{1}{2}$, since there is 1 favorable outcome (heads) out of 2 possible outcomes (heads or tails).
+
+### Intuition Behind Probability
+
+Probability helps quantify uncertainty. It tells us how likely a certain event is, based on the number of ways it can happen compared to all possible outcomes. In linear regression, probability forms the foundation for understanding more complex concepts like **expectation** and **covariance**, especially when analyzing data that involves random variables.
+
+### Types of Probability
+- **Theoretical Probability**: Based on reasoning (e.g., the probability of rolling a 3 on a fair 6-sided die is $\frac{1}{6}$).
+- **Empirical Probability**: Based on observations or experiments (e.g., estimating the probability of rain by observing past weather patterns).
+
+### Python Code for Calculating Probability
+
+Here’s a basic function to calculate the probability of an event:
+
+```python
+def probability(favorable_outcomes: int, total_outcomes: int) -> float:
+    """Calculates the probability of an event."""
+    return favorable_outcomes / total_outcomes
+```
+
+#### Explanation:
+- **Input**:
+  - `favorable_outcomes`: The number of ways the event can occur.
+  - `total_outcomes`: The total number of possible outcomes in the sample space.
+- **Output**: The probability of the event.
+- **Efficiency**: A simple division provides the probability.
+
+#### Example:
+
+```python
+favorable = 1  # Getting heads
+total = 2      # Heads or tails
+coin_flip_probability = probability(favorable, total)
+print(f"Probability of getting heads: {coin_flip_probability}")
+```
+
+This will calculate the probability of getting heads when flipping a fair coin.
+
+### Conclusion
+
+**Probability** serves as the foundation for many concepts in statistics and regression analysis, including expectation and covariance. Understanding how likely certain outcomes are allows us to model and predict real-world events with more confidence.
 
 ## 6. Expectation
 
