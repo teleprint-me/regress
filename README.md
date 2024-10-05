@@ -529,6 +529,8 @@ This will output:
 
 ## 12. Resources
 
+- [Sets](https://discrete.openmathbooks.org/dmoi3/sec_intro-sets.html)
+- [Functions](https://discrete.openmathbooks.org/dmoi3/sec_intro-functions.html)
 - [Mean](https://byjus.com/maths/mean/)
 - [Variance](https://byjus.com/maths/variance/)
 - [Covariance](https://byjus.com/maths/covariance/)
