@@ -446,7 +446,7 @@ These formulas allow us to calculate the best-fit line using the means of the da
 
 The **error** or **residual** for each data point $(x_i, y_i)$ is the difference between the observed $y_i$ and the predicted value $\hat{y}_{x_i}$ from the regression line:
 
-$$\text{error}_i = y_i - \hat{y}_{x_i}$$
+$$\text{error}\\_i = y_i - \hat{y}_{x_i}$$
 
 Where $\hat{y}_{x_i}$ is the predicted value given by:
 
