@@ -1,4 +1,8 @@
 """
+Copyright (C) 2024 Austin Berrio
+
+Module: linear.sampler
+
 Generalized sampler function that maps a domain to a codomain of integers
 with flexible parameters for range and transformation.
 """
@@ -8,14 +12,32 @@ from random import randrange
 from typing import Callable
 
 
-def sampler(
-    domain_lower: int,
-    domain_upper: int,
-    codomain_lower: int,
-    codomain_upper: int,
-    magnitude: int,
-    f: Callable[[int], int],
-):
+class SamplerParameters:
+    """
+    Generalized sampling parameters.
+
+    Parameters:
+    domain_lower: int - Lower bound of domain (input set)
+    domain_upper: int - Upper bound of domain (input set)
+    codomain_lower: int - Lower bound of codomain (output set)
+    codomain_upper: int - Upper bound of codomain (output set)
+    magnitude: int - Size of sample space
+    f: Callable[[int], int] - Transformation function
+    """
+
+    domain_lower: int
+    domain_upper: int
+    codomain_lower: int
+    codomain_upper: int
+    magnitude: int
+    f: Callable[[int], int]
+
+
+class Sampler:
+    pass
+
+
+def sampler(params: SamplerParameters):
     """
     Generalized sampling function.
 
