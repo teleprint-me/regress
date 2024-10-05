@@ -1,12 +1,12 @@
 """
 Script: linear.roll
 
-Generate a set of a values for generating linear sequences
+Generate a set of values for generating linear sequences
 
 Generate a distribution set within a given range
 """
 
-from random import randrange
+from random import randrange, seed
 
 
 def dice_roll() -> int:
@@ -14,6 +14,7 @@ def dice_roll() -> int:
 
 
 def main():
+    seed(42)  # Set a seed for deterministic output
     # create a sample size of 10
     for i in range(10):
         print(f"i: {i}, roll: {dice_roll()}")
