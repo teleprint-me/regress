@@ -6,12 +6,14 @@ A simple implementation of linear regression from scratch using pure Python. Thi
 1. Overview
 2. Mean
 3. Variance
-4. Covariance
-5. Regression
-6. Coefficient of Determination
-7. Prediction
-8. How to Run
-9. Resources
+4. Probability
+5. Expectation
+6. Covariance
+7. Regression
+8. Determination
+9. Prediction
+10. How to Run
+11. Resources
 
 ## 1. Overview
 
@@ -152,12 +154,12 @@ Variance is a critical measure in regression analysis because it helps determine
 
 **Expectation** (also known as the **expected value** or **mean** in some contexts) is a fundamental concept in probability and statistics. It represents the average or mean value of a random variable, weighted by the probabilities of the different outcomes. Expectation helps us summarize the central tendency of a random variable's probability distribution.
 
-### Mathematical Definition of Expectation ($E(X)$)
+### Mathematical Definition of Expectation ($\mathbb{E}(X)$)
 
 The expectation of a discrete random variable $X$ is calculated by summing all possible values of $X$, each weighted by its corresponding probability:
 
 $$
-E(X) = \sum_{i=1}^{n} p_i \cdot x_i
+\mathbb{E}(X) = \sum_{i=1}^{n} p_i \cdot x_i
 $$
 
 Where:
@@ -204,7 +206,7 @@ This will calculate the expectation based on the outcomes and their probabilitie
 
 The **expectation** is essential for understanding many statistical concepts, including covariance, which measures how two variables change together. It is often used in regression analysis to summarize how data is distributed and to explore relationships between variables.
 
-## 4. Covariance
+## 5. Covariance
 
 Covariance measures how much two variables change together. It indicates the direction of the linear relationship between two variables. If the covariance is positive, it means that as one variable increases, the other tends to increase as well (and vice versa). A negative covariance indicates that as one variable increases, the other tends to decrease.
 
