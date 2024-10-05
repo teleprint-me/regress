@@ -6,6 +6,7 @@ Generate a set of values for generating linear sequences
 Generate a distribution set within a given range
 """
 
+from argparse import ArgumentParser, Namespace
 from random import randrange, seed
 
 
@@ -13,9 +14,18 @@ def dice_roll() -> int:
     return [1, 2, 3, 4, 5, 6][randrange(1, 6)]
 
 
+def get_args() -> Namespace:
+    parser = ArgumentParser()
+    parser.add_argument("-s", "--seed", default=42, help="Default to Douglas Adams.")
+    return parser.parse_args()
+
+
 def main():
-    seed(42)  # Set a seed for deterministic output
-    # create a sample size of 10
+    # Get user parameters
+    args = get_args()
+    # Set a seed for deterministic output
+    seed(args.seed)
+    # Create a sample size of 10
     for i in range(10):
         print(f"i: {i}, roll: {dice_roll()}")
 
