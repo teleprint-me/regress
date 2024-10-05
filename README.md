@@ -446,15 +446,11 @@ These formulas allow us to calculate the best-fit line using the means of the da
 
 The **error** or **residual** for each data point $(x_i, y_i)$ is the difference between the observed $y_i$ and the predicted value $\hat{y}_{x_i}$ from the regression line:
 
-$$
-\text{error}_i = y_i - \hat{y}_{x_i}
-$$
+$$\text{error}_i = y_i - \hat{y}_{x_i}$$
 
 Where $\hat{y}_{x_i}$ is the predicted value given by:
 
-$$
-\hat{y}_{x_i} = \hat{m} \cdot x_i + \hat{b}
-$$
+$$\hat{y}_{x_i} = \hat{m} \cdot x_i + \hat{b}$$
 
 ### Minimizing the Sum of Squared Errors
 
@@ -508,7 +504,7 @@ Linear regression provides a method for modeling the relationship between two va
 ## 9. Coefficient of Determination ($r^2$)
 The $r^2$ value measures how well the regression line fits the data. It is calculated as:
 
-$$ r^2 = 1 - \frac{SE_{residual}}{SE_{total}} $$
+$$r^2 = 1 - \frac{SE_{residual}}{SE_{total}}$$
 
 An $r^2$ value close to 1 indicates a strong fit.
 
