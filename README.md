@@ -408,13 +408,63 @@ This will output the covariance between the two datasets, indicating the directi
 Covariance helps quantify the relationship between two variables in terms of their directional movement. In linear regression, it plays a vital role in understanding how the independent and dependent variables are related, ultimately influencing the calculation of the slope in the regression equation.
 
 ## 8. Regression
-Linear regression finds the line of best fit for a set of data points by minimizing the sum of squared errors. The line is represented by the equation:
 
-$$y = mx + b$$
+Linear regression is a method used to find the line of best fit for a set of data points by minimizing the sum of squared errors (SSE). The goal is to find the equation of a line that best represents the relationship between an independent variable $x$ and a dependent variable $y$.
+
+### Equation of the Line
+
+The equation for a simple linear regression line is given by:
+
+$$
+y = \hat{m} \cdot x + \hat{b}
+$$
 
 Where:
-- $m$ is the slope
-- $b$ is the intercept
+- $\hat{m}$ is the **slope** of the line, representing how much $y$ changes for each unit change in $x$.
+- $\hat{b}$ is the **intercept**, representing the value of $y$ when $x = 0$.
+
+### Calculating the Slope and Intercept
+
+The slope $\hat{m}$ and intercept $\hat{b}$ can be calculated using the following formulas:
+
+$$
+\hat{m} = \frac{\bar{xy} - \bar{x} \cdot \bar{y}}{\bar{x^2} - \bar{x}^2}
+$$
+$$
+\hat{b} = \bar{y} - \hat{m} \cdot \bar{x}
+$$
+
+Where:
+- $\bar{x}$ is the mean of the $x$-values.
+- $\bar{y}$ is the mean of the $y$-values.
+- $\bar{xy}$ is the mean of the products $x_i \cdot y_i$.
+- $\bar{x^2}$ is the mean of the squares of the $x$-values.
+
+These formulas allow us to calculate the best-fit line using the means of the data.
+
+### Error (Residual)
+
+The **error** or **residual** for each data point $(x_i, y_i)$ is the difference between the observed $y_i$ and the predicted value $\hat{y}_{x_i}$ from the regression line:
+
+$$
+\text{error}_i = y_i - \hat{y}_{x_i}
+$$
+
+Where $\hat{y}_{x_i}$ is the predicted value given by:
+
+$$
+\hat{y}_{x_i} = \hat{m} \cdot x_i + \hat{b}
+$$
+
+### Minimizing the Sum of Squared Errors
+
+The line of best fit is found by minimizing the sum of squared errors (SSE), which is the sum of the squared differences between the observed and predicted values:
+
+$$
+SSE = \sum_{i=1}^{n} [y_i - (\hat{m} \cdot x_i + \hat{b})]^2
+$$
+
+This ensures that the regression line is the best possible fit for the given data points by reducing the overall error.
 
 ## 9. Coefficient of Determination ($r^2$)
 The $r^2$ value measures how well the regression line fits the data. It is calculated as:
