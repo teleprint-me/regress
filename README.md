@@ -6,14 +6,15 @@ A simple implementation of linear regression from scratch using pure Python. Thi
 1. Overview
 2. Mean
 3. Variance
-4. Probability
-5. Expectation
-6. Covariance
-7. Regression
-8. Determination
-9. Prediction
-10. How to Run
-11. Resources
+4. Event
+5. Probability
+6. Expectation
+7. Covariance
+8. Regression
+9. Determination
+10. Prediction
+11. How to Run
+12. Resources
 
 ## 1. Overview
 
