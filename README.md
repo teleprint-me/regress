@@ -283,13 +283,11 @@ This will calculate the probability of getting heads when flipping a fair coin.
 
 **Expectation** (also known as the **expected value** or **mean** in some contexts) is a fundamental concept in probability and statistics. It represents the average or mean value of a random variable, weighted by the probabilities of the different outcomes. Expectation helps us summarize the central tendency of a random variable's probability distribution.
 
-### Mathematical Definition of Expectation ($\mathbb{E}(X)$)
+### Mathematical Definition of Expectation ($E(X)$)
 
-The expectation of a discrete random variable $X$ is calculated by summing all possible values of $X$, each weighted by its corresponding probability:
+The expectation ($\mathbb{E}$) of a discrete random variable $X$ is calculated by summing all possible values of $X$, each weighted by its corresponding probability:
 
-$$
-\mathbb{E}(X) = \sum_{i=1}^{n} p_i \cdot x_i
-$$
+$$E(X) = \sum_{i=1}^{n} p_i \cdot x_i$$
 
 Where:
 - $x_i$ is a possible value that the random variable $X$ can take.
