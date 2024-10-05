@@ -14,7 +14,7 @@ A simple implementation of linear regression from scratch using pure Python. Thi
 9. Determination
 10. Prediction
 11. How to Run
-12. Resources
+12. References
 
 ## 1. Overview
 
@@ -527,7 +527,7 @@ This will output:
 - Predicted values based on the regression line,
 - The $R^2$ value to assess the accuracy of the model.
 
-## 12. Resources
+## 12. References
 
 - [Sets](https://discrete.openmathbooks.org/dmoi3/sec_intro-sets.html)
 - [Functions](https://discrete.openmathbooks.org/dmoi3/sec_intro-functions.html)
