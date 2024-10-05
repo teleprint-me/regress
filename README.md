@@ -193,6 +193,33 @@ $$Pr(3) = \frac{1}{6}$$
 
 This is because there is 1 favorable outcome (rolling a 3) out of 6 possible outcomes in total.
 
+### Python Code for Calculating Event Probability
+
+Here’s a simple function to calculate the probability of an event in a sample space:
+
+```python
+def event_probability(favorable_outcomes: int, total_outcomes: int) -> float:
+    """Calculates the probability of an event."""
+    return favorable_outcomes / total_outcomes
+```
+
+#### Example:
+
+Using this function, you can calculate the probability of rolling a 3 on a six-sided die:
+
+```python
+favorable = 1  # Rolling a 3
+total = 6      # Six sides of the die
+probability_of_3 = event_probability(favorable, total)
+print(f"Probability of rolling a 3: {probability_of_3}")
+```
+
+This will calculate and print the probability of rolling a 3, which is $\frac{1}{6}$.
+
+### Conclusion
+
+An **event** is a subset of the sample space, representing one or more possible outcomes of a random experiment. Understanding events and their probabilities is a key building block in probability theory, which helps in analyzing real-world data and random processes.
+
 ## 5. Probability
 
 **Probability** is the measure of the likelihood that an event will occur. It quantifies the uncertainty of different outcomes in an experiment or random process. The probability of an event is a number between 0 and 1, where:
