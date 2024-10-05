@@ -501,6 +501,10 @@ print(f"Intercept (b): {b}")
 
 This will compute the slope and intercept for the best-fit line, which can then be used to make predictions about pizza sales based on income.
 
+### Conclusion
+
+Linear regression provides a method for modeling the relationship between two variables by fitting a line that minimizes the sum of squared errors. The slope and intercept are calculated based on the means of the data, allowing us to predict values and understand the direction and strength of the relationship between the variables.
+
 ## 9. Coefficient of Determination ($r^2$)
 The $r^2$ value measures how well the regression line fits the data. It is calculated as:
 
