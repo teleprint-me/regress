@@ -466,6 +466,41 @@ $$
 
 This ensures that the regression line is the best possible fit for the given data points by reducing the overall error.
 
+### Python Implementation
+
+Here is a Python implementation of simple linear regression, using the formulas above:
+
+```python
+def linear_regression(x: List[Union[int, float]], y: List[Union[int, float]]) -> Tuple[float, float]:
+    """Performs simple linear regression on two datasets."""
+    x_mean = mean(x)
+    y_mean = mean(y)
+    
+    xy_mean = mean([xi * yi for xi, yi in zip(x, y)])
+    x_squared_mean = mean([xi ** 2 for xi in x])
+    
+    # Calculating slope (m) and intercept (b)
+    m = (xy_mean - x_mean * y_mean) / (x_squared_mean - x_mean ** 2)
+    b = y_mean - m * x_mean
+    
+    return m, b
+```
+
+#### Example:
+
+Given the following dataset for income and pizza sales:
+
+```python
+income = [5, 10, 20, 8, 4, 6, 12, 15]
+sales = [27, 46, 73, 40, 30, 28, 46, 59]
+
+m, b = linear_regression(income, sales)
+print(f"Slope (m): {m}")
+print(f"Intercept (b): {b}")
+```
+
+This will compute the slope and intercept for the best-fit line, which can then be used to make predictions about pizza sales based on income.
+
 ## 9. Coefficient of Determination ($r^2$)
 The $r^2$ value measures how well the regression line fits the data. It is calculated as:
 
