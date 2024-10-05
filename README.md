@@ -333,7 +333,7 @@ This will calculate the expectation based on the outcomes and their probabilitie
 
 The **expectation** is essential for understanding many statistical concepts, including covariance, which measures how two variables change together. It is often used in regression analysis to summarize how data is distributed and to explore relationships between variables.
 
-## 5. Covariance
+## 7. Covariance
 
 Covariance measures how much two variables change together. It indicates the direction of the linear relationship between two variables. If the covariance is positive, it means that as one variable increases, the other tends to increase as well (and vice versa). A negative covariance indicates that as one variable increases, the other tends to decrease.
 
@@ -407,7 +407,7 @@ This will output the covariance between the two datasets, indicating the directi
 
 Covariance helps quantify the relationship between two variables in terms of their directional movement. In linear regression, it plays a vital role in understanding how the independent and dependent variables are related, ultimately influencing the calculation of the slope in the regression equation.
 
-## 5. Regression
+## 8. Regression
 Linear regression finds the line of best fit for a set of data points by minimizing the sum of squared errors. The line is represented by the equation:
 
 $$y = mx + b$$
@@ -416,17 +416,17 @@ Where:
 - $m$ is the slope
 - $b$ is the intercept
 
-## 6. Coefficient of Determination ($r^2$)
+## 9. Coefficient of Determination ($r^2$)
 The $r^2$ value measures how well the regression line fits the data. It is calculated as:
 
 $$ r^2 = 1 - \frac{SE_{residual}}{SE_{total}} $$
 
 An $r^2$ value close to 1 indicates a strong fit.
 
-## 7. Prediction
+## 10. Prediction
 Once the regression line is calculated, it can be used to predict values of the dependent variable based on the independent variable.
 
-## 8. How to Run
+## 11. How to Run
 
 To run the project, simply clone the repository and execute the script:
 
@@ -441,7 +441,7 @@ This will output:
 - Predicted values based on the regression line,
 - The $R^2$ value to assess the accuracy of the model.
 
-## 9. Resources
+## 12. Resources
 
 - [Mean](https://byjus.com/maths/mean/)
 - [Variance](https://byjus.com/maths/variance/)
