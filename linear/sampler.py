@@ -11,11 +11,6 @@ from argparse import ArgumentParser, Namespace
 from random import randrange, seed
 
 
-# Generate and print samples
-def sample_space(start: int, stop: int) -> int:
-    return list(range(start, stop))[randrange(stop - start)]
-
-
 def get_args() -> Namespace:
     parser = ArgumentParser()
     parser.add_argument(
@@ -29,40 +24,50 @@ def get_args() -> Namespace:
         "-d",
         "--deterministic",
         action="store_true",
-        help="Enable deterministic output.",
+        help="Enable deterministic output. Defaults to False.",
     )
     parser.add_argument(
         "-n",
         "--size",
         type=int,
         default=10,
-        help="Number of samples.",
+        help="Number of samples. Defaults to 10.",
     )
     parser.add_argument(
         "--start",
         type=int,
         default=1,
-        help="Lower boundary of the sampled sequence.",
+        help="Lower boundary of the sampled sequence (inclusive). Defaults to 1.",
     )
     parser.add_argument(
         "--stop",
         type=int,
-        default=6,
-        help="Upper boundary of the sampled sequence.",
+        default=7,
+        help="Upper boundary of the sampled sequence (exclusive). Defaults to 7.",
     )
     return parser.parse_args()
 
 
 def main():
-    # Get CLI arguments
+    # Get user parameters
     args = get_args()
 
-    # Set the seed for deterministic output if the flag is provided
+    # Population: Die faces, deck of cards, color wheel, etc.
+    population = list(range(args.start, args.stop))
+    population_size = len(population)
+
+    # Total permutations with replacement: j^n
+    total_permutations = int(pow(population_size, args.size))
+    print(f"Total possible permutations with replacement: {total_permutations}")
+
+    # Set a seed for deterministic output if the flag is set
     if args.deterministic:
         seed(args.seed)
 
-    samples = [sample_space(args.start, args.stop) for _ in range(args.size)]
-    print(f"Sampled space: {samples}")
+    # Sample selected population
+    for i in range(args.size):
+        sample = population[randrange(len(population))]
+        print(f"i: {i + 1}, sample: {sample}")
 
 
 if __name__ == "__main__":
