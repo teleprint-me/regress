@@ -136,11 +136,10 @@ def main():
         sampler = NonReplacementSampler(parameters)
     else:
         sampler = ReplacementSampler(parameters)
-    print(f"Total possible permutations with replacement: {sampler.permutations}")
 
     # Sample selected population
     for i, sample in enumerate(sampler.generate()):
-        print(f"i: {i + 1}, sample: {sample}")
+        print(f"i: {i + 1}, p: {sampler.permutations}, s: {sample}")
 
 
 if __name__ == "__main__":
