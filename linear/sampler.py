@@ -10,7 +10,7 @@ import argparse
 import dataclasses
 import math
 import random
-from typing import Generator, Optional
+from typing import Generator, Optional, Union
 
 
 @dataclasses.dataclass
@@ -73,6 +73,15 @@ class NonReplacementSampler(ReplacementSampler):
             yield self.sample()
 
 
+def get_sampler(
+    args: argparse.Namespace,
+) -> Union[ReplacementSampler, NonReplacementSampler]:
+    parameters = SamplerParameters(args.start, args.stop, args.size)
+    if args.non_replacement:
+        return NonReplacementSampler(parameters)
+    return ReplacementSampler(parameters)
+
+
 def get_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -129,15 +138,8 @@ def main():
     if args.deterministic:
         random.seed(args.seed)
 
-    # Create a non-replacement sampler if the flag is set
-    sampler = None
-    parameters = SamplerParameters(args.start, args.stop, args.size)
-    if args.non_replacement:
-        sampler = NonReplacementSampler(parameters)
-    else:
-        sampler = ReplacementSampler(parameters)
-
     # Sample selected population
+    sampler = get_sampler(args)
     for i, sample in enumerate(sampler.generate()):
         print(f"i: {i + 1}, p: {sampler.permutations}, s: {sample}")
 
