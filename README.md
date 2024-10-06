@@ -502,12 +502,35 @@ This will compute the slope and intercept for the best-fit line, which can then 
 
 Linear regression provides a method for modeling the relationship between two variables by fitting a line that minimizes the sum of squared errors. The slope and intercept are calculated based on the means of the data, allowing us to predict values and understand the direction and strength of the relationship between the variables.
 
-## 9. Coefficient of Determination ($r^2$)
-The $r^2$ value measures how well the regression line fits the data. It is calculated as:
+## 9. Determination $r^2$
 
-$$r^2 = 1 - \frac{SE_{residual}}{SE_{total}}$$
+The **coefficient of determination** $r^2$ is a metric used to assess how well a regression model fits the data. It measures the proportion of the variance in the dependent variable $y$ that is predictable from the independent variable $x$. The closer the $r^2$ value is to 1, the better the model fits the data.
 
-An $r^2$ value close to 1 indicates a strong fit.
+### Formula for $r^2$:
+
+$$
+r^2 = 1 - \frac{SE_{residual}}{SE_{total}}
+$$
+
+Where:
+- $SE_{residual} = \sum (y_i - \hat{y}_{x_i})^2$, also called the **sum of squared errors (SSE)**, measures how far the actual values $y_i$ deviate from the predicted values $\hat{y}_{x_i}$ from the regression line.
+- $SE_{total} = \sum (y_i - \bar{y})^2$, also known as the **total sum of squares (TSS)**, measures how far the actual values $y_i$ deviate from the mean $\bar{y}$.
+
+### Intuition:
+1. **$r^2 = 1$**: When $SE_{residual} = 0$, this means the regression line perfectly fits the data. All the actual values $y_i$ lie exactly on the regression line, meaning no error exists, so $r^2 = 1$.
+   
+2. **$r^2 = 0$**: When $SE_{residual} = SE_{total}$, this means the regression line does no better at predicting the data than simply using the mean $\bar{y}$. In this case, the model has no explanatory power, and the fit is poor.
+
+3. **Values between 0 and 1**: Most real-world models will have $r^2$ values between 0 and 1. An $r^2$ value close to 1 indicates that the regression line explains most of the variability in the data, while values closer to 0 mean the model performs poorly.
+
+### Decomposing the Error:
+The **residual sum of squares (SSE)** captures the total variation that remains unexplained by the model. The **total sum of squares (TSS)** represents the total variation in the data. By comparing the two, $r^2$ tells you how much of the total variation has been explained by the model.
+
+### Key Points:
+- **High $r^2$** implies a strong relationship between the independent and dependent variables, meaning the model has a good fit.
+- **Low $r^2$** suggests that the regression line doesn’t explain much of the variance in the dependent variable.
+
+This gives us a clearer picture of how accurate the regression model is in capturing the overall trend in the data. It’s important to remember, though, that a high $r^2$ doesn’t necessarily mean the model is correct—it just fits the data well.
 
 ## 10. Prediction
 Once the regression line is calculated, it can be used to predict values of the dependent variable based on the independent variable.
