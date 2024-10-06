@@ -69,8 +69,11 @@ class NonReplacementSampler(ReplacementSampler):
             return None
 
     def generate(self) -> Generator:
-        for _ in range(min(self.parameters.size, self.population_size)):
-            yield self.sample()
+        # Pre-allocate a copy of the population once
+        population = self.population[:]
+        # Work on a copy to avoid mutating the original
+        for _ in range(min(self.parameters.size, len(population))):
+            yield population.pop(random.randrange(len(population)))
 
 
 def get_sampler(
@@ -87,7 +90,7 @@ def get_sampled_frequency(
 ) -> Dict[int, int]:
     # Collect sampled frequency metadata
     frequency = {}
-    for i, sample in enumerate(sampler.generate()):
+    for sample in sampler.generate():
         element = frequency.get(sample, 0)
         frequency[sample] = element + 1
     return frequency
@@ -97,9 +100,12 @@ def print_sampled_frequency(
     frequency: Dict[int, int], permutations: int, verbose: bool
 ) -> None:
     print("Statistics:")
+    if verbose:
+        print(f"Total possible permutations: {permutations}")
     for i, (k, v) in enumerate(frequency.items()):
         if verbose:
-            print(f"i: {i + 1}, p: {permutations}, s: {k}, o: {v}")
+            # iteration, sample, observation
+            print(f"i: {i + 1}, s: {k}, o: {v}")
         else:
             print(f"sample: {k}, observations: {v}")
 
