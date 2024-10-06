@@ -18,6 +18,10 @@ class SamplerBoundaries:
     lower: int
     upper: int
 
+    def assert_boundary(self):
+        assert self.lower > 0, "Lower bound must be greater than 0"
+        assert self.upper > self.lower, "Upper bound must be greater than lower bound"
+
 
 @dataclass
 class SamplerParameters:
@@ -96,6 +100,9 @@ def main():
         magnitude=args.magnitude,
         f=lambda x: x * args.codomain_lower,  # transformation function
     )
+
+    params.domain.assert_boundary()
+    params.codomain.assert_boundary()
 
     # Create the sampler with the given parameters
     sampler = Sampler(params)
