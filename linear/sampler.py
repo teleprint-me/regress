@@ -6,12 +6,40 @@ Module: linear.sampler
 Generalized sampler for replaceable selection sampling.
 """
 
-from argparse import ArgumentParser, Namespace
-from random import randrange, seed
+import argparse
+import random
+from typing import Generator
 
 
-def get_args() -> Namespace:
-    parser = ArgumentParser()
+class Sampler:
+    def __init__(self, start: int, stop: int, size: int, seed: int):
+        self.start = start
+        self.stop = stop
+        self.size = size
+        self.seed = seed
+
+    @property
+    def population(self) -> int:
+        return list(range(self.start, self.stop))
+
+    @property
+    def population_size(self) -> int:
+        return len(self.population)
+
+    @property
+    def permutations(self) -> int:
+        return int(pow(self.population_size, self.size))
+
+    def sample(self) -> int:
+        return self.population[random.randrange(self.population_size)]
+
+    def generate(self) -> Generator:
+        for i in range(self.size):
+            yield self.sample()
+
+
+def get_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
     parser.add_argument(
         "-s",
         "--seed",
@@ -51,21 +79,15 @@ def main():
     # Get user parameters
     args = get_args()
 
-    # Population: Die faces, deck of cards, color wheel, etc.
-    population = list(range(args.start, args.stop))
-    population_size = len(population)
-
-    # Total permutations with replacement: j^n
-    total_permutations = int(pow(population_size, args.size))
-    print(f"Total possible permutations with replacement: {total_permutations}")
+    sampler = Sampler(args.start, args.stop, args.size, args.seed)
+    print(f"Total possible permutations with replacement: {sampler.permutations}")
 
     # Set a seed for deterministic output if the flag is set
     if args.deterministic:
-        seed(args.seed)
+        random.seed(args.seed)
 
     # Sample selected population
-    for i in range(args.size):
-        sample = population[randrange(len(population))]
+    for i, sample in enumerate(sampler.generate()):
         print(f"i: {i + 1}, sample: {sample}")
 
 
