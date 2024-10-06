@@ -105,6 +105,12 @@ def get_args() -> argparse.Namespace:
 def main():
     args = get_args()
 
+    if args.non_replacement and args.size > (args.stop - args.start):
+        print(
+            f"Error: Cannot sample {args.size} elements from a population of {args.stop - args.start}"
+        )
+        return
+
     # Set a seed for deterministic output if the flag is set
     if args.deterministic:
         random.seed(args.seed)
