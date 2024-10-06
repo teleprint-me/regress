@@ -9,7 +9,7 @@ flexible parameters for range and transformation.
 
 from argparse import ArgumentParser, Namespace
 from dataclasses import dataclass
-from random import randrange
+from random import randrange, seed
 from typing import Callable, List
 
 
@@ -59,6 +59,7 @@ class Sampler:
 
 def get_args() -> Namespace:
     parser = ArgumentParser()
+    parser.add_argument("--seed", type=int, default=42, help="The initial seed")
     parser.add_argument(
         "--domain-lower", type=int, default=1, help="Lower bound of domain"
     )
@@ -79,6 +80,8 @@ def get_args() -> Namespace:
 
 def main():
     args = get_args()
+
+    seed(args.seed)
 
     # Create sampler parameters
     params = SamplerParameters(
