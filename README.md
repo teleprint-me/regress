@@ -513,7 +513,7 @@ r^2 = 1 - \frac{SE_{residual}}{SE_{total}}
 $$
 
 Where:
-- $SE_{residual} = \sum{(y_i - \hat{y}_{x_i})}^2$, also called the **sum of squared errors (SSE)**, measures how far the actual values $y_i$ deviate from the predicted values $\hat{y}_{x_i}$ from the regression line.
+- $SE_{residual} = \sum{(y_i - \hat{y}_{x_{i}})}^2$, also called the **sum of squared errors (SSE)**, measures how far the actual values $y_i$ deviate from the predicted values $\hat{y}_{x_i}$ from the regression line.
 - $SE_{total} = \sum (y_i - \bar{y})^2$, also known as the **total sum of squares (TSS)**, measures how far the actual values $y_i$ deviate from the mean $\bar{y}$.
 
 ### Intuition:
