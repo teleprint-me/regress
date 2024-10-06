@@ -8,8 +8,9 @@ Generalized sampler for replaceable selection sampling.
 
 import argparse
 import dataclasses
+import math
 import random
-from typing import Generator, List, Optional
+from typing import Generator, Optional
 
 
 @dataclasses.dataclass
@@ -30,6 +31,10 @@ class ReplacementSampler:
 
     @property
     def permutations(self) -> int:
+        """
+        The formula for the number of permutations with replacement is j^n,
+        where j is the population size and n is the sample size.
+        """
         return int(pow(self.population_size, self.parameters.size))
 
     def repopulate(self) -> None:
@@ -46,7 +51,16 @@ class ReplacementSampler:
 class NonReplacementSampler(ReplacementSampler):
     @property
     def permutations(self) -> int:
-        return int(pow(self.population_size, self.parameters.size))
+        """
+        The formula for permutations is (j! / (j - n)!), where j is the
+        population size and n is the sample size.
+        """
+        # Ensure the population is large enough for the requested sample size
+        if self.parameters.size > self.population_size:
+            return 0
+        return math.factorial(self.population_size) // math.factorial(
+            self.population_size - self.parameters.size
+        )
 
     def sample(self) -> Optional[int]:
         try:
