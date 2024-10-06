@@ -10,7 +10,7 @@ flexible parameters for range and transformation.
 from argparse import ArgumentParser, Namespace
 from dataclasses import dataclass
 from random import randrange, seed
-from typing import Callable, List
+from typing import Callable, Generator, List
 
 
 @dataclass
@@ -55,6 +55,9 @@ class Sampler:
             for x in self.codomain_space
         ]
         return codomain_space
+
+    def generate(self) -> Generator:
+        yield [i for i in self.sample]
 
 
 def get_args() -> Namespace:
