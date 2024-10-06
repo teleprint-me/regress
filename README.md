@@ -509,17 +509,17 @@ The **coefficient of determination** $r^2$ is a metric used to assess how well a
 ### Formula for $r^2$:
 
 $$
-r^2 = 1 - \frac{SE_{residual}}{SE_{total}}
+r^2 = 1 - \frac{SSE_{residual}}{SSE_{total}}
 $$
 
 Where:
-- $SE_{residual} = \sum{(y_{i} - \hat{y}_{x_{i}})}^2$, also called the **sum of squared errors (SSE)**, measures how far the actual values $y_i$ deviate from the predicted values $\hat{y}_{x_i}$ from the regression line.
-- $SE_{total} = \sum (y_i - \bar{y})^2$, also known as the **total sum of squares (TSS)**, measures how far the actual values $y_i$ deviate from the mean $\bar{y}$.
+- $SSE_{residual} = \sum{(y_{i} - \hat{y}_{x_{i}})}^2$, also called the **sum of squared errors (SSE)**, measures how far the actual values $y_i$ deviate from the predicted values $\hat{y}_{x_i}$ from the regression line.
+- $SSE_{total} = \sum (y_i - \bar{y})^2$, also known as the **total sum of squares (TSS)**, measures how far the actual values $y_i$ deviate from the mean $\bar{y}$.
 
 ### Intuition:
-1. **$r^2 = 1$**: When $SE_{residual} = 0$, this means the regression line perfectly fits the data. All the actual values $y_i$ lie exactly on the regression line, meaning no error exists, so $r^2 = 1$.
+1. **$r^2 = 1$**: When $SSE_{residual} = 0$, this means the regression line perfectly fits the data. All the actual values $y_i$ lie exactly on the regression line, meaning no error exists, so $r^2 = 1$.
    
-2. **$r^2 = 0$**: When $SE_{residual} = SE_{total}$, this means the regression line does no better at predicting the data than simply using the mean $\bar{y}$. In this case, the model has no explanatory power, and the fit is poor.
+2. **$r^2 = 0$**: When $SSE_{residual} = SSE_{total}$, this means the regression line does no better at predicting the data than simply using the mean $\bar{y}$. In this case, the model has no explanatory power, and the fit is poor.
 
 3. **Values between 0 and 1**: Most real-world models will have $r^2$ values between 0 and 1. An $r^2$ value close to 1 indicates that the regression line explains most of the variability in the data, while values closer to 0 mean the model performs poorly.
 
