@@ -10,7 +10,7 @@ import argparse
 import dataclasses
 import math
 import random
-from typing import Generator, Optional, Union
+from typing import Dict, Generator, Optional, Union
 
 
 @dataclasses.dataclass
@@ -82,6 +82,28 @@ def get_sampler(
     return ReplacementSampler(parameters)
 
 
+def get_sampled_frequency(
+    sampler: Union[ReplacementSampler, NonReplacementSampler]
+) -> Dict[int, int]:
+    # Collect sampled frequency metadata
+    frequency = {}
+    for i, sample in enumerate(sampler.generate()):
+        element = frequency.get(sample, 0)
+        frequency[sample] = element + 1
+    return frequency
+
+
+def print_sampled_frequency(
+    frequency: Dict[int, int], permutations: int, verbose: bool
+) -> None:
+    print("Statistics:")
+    for i, (k, v) in enumerate(frequency.items()):
+        if verbose:
+            print(f"i: {i + 1}, p: {permutations}, s: {k}, o: {v}")
+        else:
+            print(f"sample: {k}, observations: {v}")
+
+
 def get_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -144,22 +166,10 @@ def main():
     if args.deterministic:
         random.seed(args.seed)
 
-    # Collect sampled metadata
-    metadata = {}
-
     # Sample selected population
     sampler = get_sampler(args)
-    for i, sample in enumerate(sampler.generate()):
-        element = metadata.get(sample, 0)
-        metadata[sample] = element + 1
-
-    print("Statistics:")
-    for i, (k, v) in enumerate(metadata.items()):
-        if args.verbose:
-            # iteration, permutation, sample, observation
-            print(f"i: {i + 1}, p: {sampler.permutations}, s: {k}, o: {v}")
-        else:
-            print(f"sample: {k}, observations: {v}")
+    frequency = get_sampled_frequency(sampler)
+    print_sampled_frequency(frequency, sampler.permutations, args.verbose)
 
 
 if __name__ == "__main__":
