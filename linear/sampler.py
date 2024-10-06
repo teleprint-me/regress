@@ -10,16 +10,18 @@ flexible parameters for range and transformation.
 from argparse import ArgumentParser, Namespace
 from dataclasses import dataclass
 from random import randrange, seed
-from typing import Callable, Generator, List
+from typing import Callable, Generator, List, Set
 
 
 @dataclass
-class SamplerBoundaries:
+class SamplerBoundary:
     lower: int
     upper: int
 
     def assert_boundary(self):
-        assert self.lower > 0, "Lower bound must be greater than 0"
+        # Inclusive
+        assert self.lower >= 0, "Lower bound must be greater than 0"
+        # Exclusive - mostly for consistency with python
         assert self.upper > self.lower, "Upper bound must be greater than lower bound"
 
 
@@ -29,8 +31,7 @@ class SamplerParameters:
     Generalized sampling parameters.
     """
 
-    domain: SamplerBoundaries
-    codomain: SamplerBoundaries
+    domain: SamplerBoundary
     magnitude: int
     f: Callable[[int], int]  # Transformation function
 
@@ -41,47 +42,44 @@ class Sampler:
 
     @property
     def domain_space(self) -> List[int]:
-        return [
-            randrange(self.params.domain.lower, self.params.domain.upper)
-            for _ in range(self.params.magnitude)
-        ]
+        """The set of elements defining the input space."""
+        return [i for i in range(self.params.domain.lower, self.params.domain.upper)]
 
     @property
     def codomain_space(self) -> List[int]:
-        # Apply transformation function f
+        """The set of elements defining the output space."""
         return [self.params.f(x) for x in self.domain_space]
 
-    def sample(self) -> List[int]:
-        """Generate a sample space and apply the transformation."""
-        # Clip to codomain bounds
-        codomain_space = [
-            max(self.params.codomain.lower, min(self.params.codomain.upper, x))
-            for x in self.codomain_space
-        ]
-        return codomain_space
+    def sample(self) -> int:
+        """Select a replaceable sample from the codomain space."""
+        return self.codomain_space[randrange(self.params.magnitude)]
 
     def generate(self) -> Generator:
-        for i in self.sample:
-            yield i
+        """Generate replaceable samples from the sampled space."""
+        for _ in self.codomain_space:
+            yield self.sample()
 
 
 def get_args() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("--seed", type=int, default=42, help="The initial seed")
+    parser.add_argument(
+        "-d",
+        "--deterministic",
+        action="store_true",
+        help="Enable deterministic output.",
+    )
+    parser.add_argument(
+        "-s",
+        "--seed",
+        type=int,
+        default=42,
+        help="Seed for deterministic output. Defaults to 42.",
+    )
     parser.add_argument(
         "--domain-lower", type=int, default=1, help="Lower bound of domain"
     )
     parser.add_argument(
         "--domain-upper", type=int, default=6, help="Upper bound of domain"
-    )
-    parser.add_argument(
-        "--codomain-lower", type=int, default=10, help="Lower bound of codomain"
-    )
-    parser.add_argument(
-        "--codomain-upper", type=int, default=100, help="Upper bound of codomain"
-    )
-    parser.add_argument(
-        "--magnitude", type=int, default=10, help="Size of the sample space"
     )
     return parser.parse_args()
 
@@ -89,20 +87,17 @@ def get_args() -> Namespace:
 def main():
     args = get_args()
 
-    seed(args.seed)
+    if args.deterministic:
+        seed(args.seed)
 
     # Create sampler parameters
     params = SamplerParameters(
-        domain=SamplerBoundaries(lower=args.domain_lower, upper=args.domain_upper),
-        codomain=SamplerBoundaries(
-            lower=args.codomain_lower, upper=args.codomain_upper
-        ),
-        magnitude=args.magnitude,
-        f=lambda x: x * args.codomain_lower,  # transformation function
+        domain=SamplerBoundary(lower=args.domain_lower, upper=args.domain_upper),
+        magnitude=args.domain_upper - 1,
+        f=lambda x: x * x,  # transformation function
     )
 
     params.domain.assert_boundary()
-    params.codomain.assert_boundary()
 
     # Create the sampler with the given parameters
     sampler = Sampler(params)
@@ -111,7 +106,9 @@ def main():
     sample_result = sampler.sample()
 
     # Output the result
-    print(f"Sampled codomain: {sample_result}")
+    print(f"Domain space: {sampler.domain_space}")
+    print(f"Codomain space: {sampler.codomain_space}")
+    print(f"Sampled codomain element: {sample_result}")
 
 
 if __name__ == "__main__":
