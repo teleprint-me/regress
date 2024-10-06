@@ -3,8 +3,7 @@ Copyright (C) 2024 Austin Berrio
 
 Module: linear.sampler
 
-Generalized sampler function that maps a domain to a codomain of integers with
-flexible parameters for range and transformation.
+Generalized sampler for replaceable selection sampling.
 """
 
 from argparse import ArgumentParser, Namespace
