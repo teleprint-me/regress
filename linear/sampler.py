@@ -57,7 +57,8 @@ class Sampler:
         return codomain_space
 
     def generate(self) -> Generator:
-        yield [i for i in self.sample]
+        for i in self.sample:
+            yield i
 
 
 def get_args() -> Namespace:
