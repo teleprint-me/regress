@@ -7,20 +7,22 @@ Generalized sampler for replaceable selection sampling.
 """
 
 import argparse
+import dataclasses
 import random
-from typing import Generator
+from typing import Generator, List, Optional
 
 
-class Sampler:
-    def __init__(self, start: int, stop: int, size: int, seed: int):
-        self.start = start
-        self.stop = stop
-        self.size = size
-        self.seed = seed
+@dataclasses.dataclass
+class SamplerParameters:
+    start: int
+    stop: int
+    size: int
 
-    @property
-    def population(self) -> int:
-        return list(range(self.start, self.stop))
+
+class ReplacementSampler:
+    def __init__(self, parameters: SamplerParameters):
+        self.parameters = parameters
+        self.population = list(range(parameters.start, parameters.stop))
 
     @property
     def population_size(self) -> int:
@@ -28,13 +30,32 @@ class Sampler:
 
     @property
     def permutations(self) -> int:
-        return int(pow(self.population_size, self.size))
+        return int(pow(self.population_size, self.parameters.size))
+
+    def repopulate(self) -> None:
+        self.population = list(range(self.parameters.start, self.parameters.stop))
 
     def sample(self) -> int:
         return self.population[random.randrange(self.population_size)]
 
     def generate(self) -> Generator:
-        for i in range(self.size):
+        for _ in range(self.parameters.size):
+            yield self.sample()
+
+
+class NonReplacementSampler(ReplacementSampler):
+    @property
+    def permutations(self) -> int:
+        return int(pow(self.population_size, self.parameters.size))
+
+    def sample(self) -> Optional[int]:
+        try:
+            return self.population.pop(random.randrange(self.population_size))
+        except (IndexError,):
+            return None
+
+    def generate(self) -> Generator:
+        for _ in range(min(self.parameters.size, self.population_size)):
             yield self.sample()
 
 
@@ -52,6 +73,12 @@ def get_args() -> argparse.Namespace:
         "--deterministic",
         action="store_true",
         help="Enable deterministic output. Defaults to False.",
+    )
+    parser.add_argument(
+        "-r",
+        "--non-replacement",
+        action="store_true",
+        help="Enable non-replacement sampling. Defaults to False.",
     )
     parser.add_argument(
         "-n",
@@ -76,15 +103,20 @@ def get_args() -> argparse.Namespace:
 
 
 def main():
-    # Get user parameters
     args = get_args()
-
-    sampler = Sampler(args.start, args.stop, args.size, args.seed)
-    print(f"Total possible permutations with replacement: {sampler.permutations}")
 
     # Set a seed for deterministic output if the flag is set
     if args.deterministic:
         random.seed(args.seed)
+
+    # Create a non-replacement sampler if the flag is set
+    sampler = None
+    parameters = SamplerParameters(args.start, args.stop, args.size)
+    if args.non_replacement:
+        sampler = NonReplacementSampler(parameters)
+    else:
+        sampler = ReplacementSampler(parameters)
+    print(f"Total possible permutations with replacement: {sampler.permutations}")
 
     # Sample selected population
     for i, sample in enumerate(sampler.generate()):
