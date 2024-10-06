@@ -122,6 +122,12 @@ def get_args() -> argparse.Namespace:
         default=7,
         help="Upper boundary of the sampled sequence (exclusive). Defaults to 7.",
     )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Output the distribution frequency. Defaults to False.",
+    )
     return parser.parse_args()
 
 
@@ -138,10 +144,22 @@ def main():
     if args.deterministic:
         random.seed(args.seed)
 
+    # Collect sampled metadata
+    metadata = {}
+
     # Sample selected population
     sampler = get_sampler(args)
     for i, sample in enumerate(sampler.generate()):
-        print(f"i: {i + 1}, p: {sampler.permutations}, s: {sample}")
+        element = metadata.get(sample, 0)
+        metadata[sample] = element + 1
+
+    print("Statistics:")
+    for i, (k, v) in enumerate(metadata.items()):
+        if args.verbose:
+            # iteration, permutation, sample, observation
+            print(f"i: {i + 1}, p: {sampler.permutations}, s: {k}, o: {v}")
+        else:
+            print(f"sample: {k}, observations: {v}")
 
 
 if __name__ == "__main__":
