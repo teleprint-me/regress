@@ -7,6 +7,7 @@ Generalized sampler function that maps a domain to a codomain of integers with
 flexible parameters for range and transformation.
 """
 
+from argparse import ArgumentParser, Namespace
 from dataclasses import dataclass
 from random import randrange
 from typing import Callable, List
@@ -56,16 +57,37 @@ class Sampler:
         return codomain_space
 
 
+def get_args() -> Namespace:
+    parser = ArgumentParser()
+    parser.add_argument(
+        "--domain-lower", type=int, default=1, help="Lower bound of domain"
+    )
+    parser.add_argument(
+        "--domain-upper", type=int, default=6, help="Upper bound of domain"
+    )
+    parser.add_argument(
+        "--codomain-lower", type=int, default=10, help="Lower bound of codomain"
+    )
+    parser.add_argument(
+        "--codomain-upper", type=int, default=100, help="Upper bound of codomain"
+    )
+    parser.add_argument(
+        "--magnitude", type=int, default=10, help="Size of the sample space"
+    )
+    return parser.parse_args()
+
+
 def main():
-    # Define the transformation function
-    f = lambda x: x * 10  # Example: multiply domain value by 10
+    args = get_args()
 
     # Create sampler parameters
     params = SamplerParameters(
-        domain=SamplerBoundaries(lower=1, upper=6),
-        codomain=SamplerBoundaries(lower=10, upper=100),
-        magnitude=10,
-        f=f,
+        domain=SamplerBoundaries(lower=args.domain_lower, upper=args.domain_upper),
+        codomain=SamplerBoundaries(
+            lower=args.codomain_lower, upper=args.codomain_upper
+        ),
+        magnitude=args.magnitude,
+        f=lambda x: x * args.codomain_lower,  # transformation function
     )
 
     # Create the sampler with the given parameters
