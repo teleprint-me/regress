@@ -123,14 +123,8 @@ def get_args() -> argparse.Namespace:
         "-s",
         "--seed",
         type=int,
-        default=42,
-        help="Seed for deterministic output. Defaults to 42.",
-    )
-    parser.add_argument(
-        "-d",
-        "--deterministic",
-        action="store_true",
-        help="Enable deterministic output. Defaults to False.",
+        default=None,
+        help="Seed for deterministic output. Defaults to None.",
     )
     parser.add_argument(
         "-r",
@@ -176,8 +170,7 @@ def main():
         return
 
     # Set a seed for deterministic output if the flag is set
-    if args.deterministic:
-        random.seed(args.seed)
+    random.seed(args.seed)
 
     # Sample selected population
     sampler = get_sampler(args)
