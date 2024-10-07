@@ -7,22 +7,38 @@ Generalized sampler for replaceable selection sampling.
 """
 
 import argparse
-import dataclasses
 import math
 import random
-from typing import Dict, Generator, Optional, Union
+from typing import Dict, Generator, Union
+
+
+class PopulationManager:
+    def __init__(self, range_start: int, range_stop: int):
+        self.range_start = range_start
+        self.range_stop = range_stop
+        self.population = self.populate()
+
+    def populate(self) -> list[int]:
+        """Generate elements based on the range."""
+        return list(range(self.range_start, self.range_stop))
+
+    def size(self) -> int:
+        """Return the population size."""
+        return len(self.population)
 
 
 class ReplacementSampler:
     def __init__(self, range_start: int, range_stop: int, sample_size: int):
-        self.range_start = range_start
-        self.range_stop = range_stop
         self.sample_size = sample_size
-        self.population = self.populate()
+        self.population_manager = PopulationManager(range_start, range_stop)
+
+    @property
+    def population(self) -> list[int]:
+        return self.population_manager.population
 
     @property
     def population_size(self) -> int:
-        return len(self.population)
+        return self.population_manager.size()
 
     @property
     def permutations(self) -> int:
@@ -32,14 +48,10 @@ class ReplacementSampler:
         """
         return int(pow(self.population_size, self.sample_size))
 
-    def populate(self) -> list[int]:
-        """Generate elements based on the range."""
-        return list(range(self.range_start, self.range_stop))
-
     def sample(self) -> int:
         return self.population[random.randrange(self.population_size)]
 
-    def generate(self) -> Generator:
+    def generate(self) -> Generator[int, None, None]:
         for _ in range(self.sample_size):
             yield self.sample()
 
@@ -59,9 +71,9 @@ class NonReplacementSampler(ReplacementSampler):
         )
 
     def sample(self) -> int:
-        if not self.population:
+        if not self.population_size:
             raise StopIteration("No more elements to sample.")
-        return self.population.pop(random.randrange(len(self.population)))
+        return self.population.pop(random.randrange(self.population_size))
 
     def generate(self) -> Generator[int, None, None]:
         for _ in range(min(self.sample_size, self.population_size)):
