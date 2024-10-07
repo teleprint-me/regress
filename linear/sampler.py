@@ -13,17 +13,12 @@ import random
 from typing import Dict, Generator, Optional, Union
 
 
-@dataclasses.dataclass
-class SamplerParameters:
-    start: int
-    stop: int
-    size: int
-
-
 class ReplacementSampler:
-    def __init__(self, parameters: SamplerParameters):
-        self.parameters = parameters
-        self.population = list(range(parameters.start, parameters.stop))
+    def __init__(self, range_start: int, range_stop: int, sample_size: int):
+        self.range_start = range_start
+        self.range_stop = range_stop
+        self.sample_size = sample_size
+        self.population = self.populate()
 
     @property
     def population_size(self) -> int:
@@ -35,16 +30,17 @@ class ReplacementSampler:
         The formula for the number of permutations with replacement is j^n,
         where j is the population size and n is the sample size.
         """
-        return int(pow(self.population_size, self.parameters.size))
+        return int(pow(self.population_size, self.sample_size))
 
-    def repopulate(self) -> None:
-        self.population = list(range(self.parameters.start, self.parameters.stop))
+    def populate(self) -> list[int]:
+        """Generate elements based on the range."""
+        return list(range(self.range_start, self.range_stop))
 
     def sample(self) -> int:
         return self.population[random.randrange(self.population_size)]
 
     def generate(self) -> Generator:
-        for _ in range(self.parameters.size):
+        for _ in range(self.sample_size):
             yield self.sample()
 
 
@@ -56,33 +52,31 @@ class NonReplacementSampler(ReplacementSampler):
         population size and n is the sample size.
         """
         # Ensure the population is large enough for the requested sample size
-        if self.parameters.size > self.population_size:
+        if self.sample_size > self.population_size:
             return 0
         return math.factorial(self.population_size) // math.factorial(
-            self.population_size - self.parameters.size
+            self.population_size - self.sample_size
         )
 
-    def sample(self) -> Optional[int]:
-        try:
-            return self.population.pop(random.randrange(self.population_size))
-        except (IndexError,):
-            return None
+    def sample(self) -> int:
+        if not self.population:
+            raise StopIteration("No more elements to sample.")
+        return self.population.pop(random.randrange(len(self.population)))
 
-    def generate(self) -> Generator:
-        # Pre-allocate a copy of the population once
-        population = self.population[:]
-        # Work on a copy to avoid mutating the original
-        for _ in range(min(self.parameters.size, len(population))):
-            yield population.pop(random.randrange(len(population)))
+    def generate(self) -> Generator[int, None, None]:
+        for _ in range(min(self.sample_size, self.population_size)):
+            yield self.sample()
 
 
 def get_sampler(
     args: argparse.Namespace,
 ) -> Union[ReplacementSampler, NonReplacementSampler]:
-    parameters = SamplerParameters(args.start, args.stop, args.size)
+    sampler = None
     if args.non_replacement:
-        return NonReplacementSampler(parameters)
-    return ReplacementSampler(parameters)
+        sampler = NonReplacementSampler
+    else:
+        sampler = ReplacementSampler
+    return sampler(args.start, args.stop, args.size)
 
 
 def get_sampled_frequency(
