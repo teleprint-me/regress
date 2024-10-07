@@ -28,9 +28,9 @@ class PopulationManager:
 
 
 class ReplacementSampler:
-    def __init__(self, range_start: int, range_stop: int, sample_size: int):
+    def __init__(self, population_manager: PopulationManager, sample_size: int):
         self.sample_size = sample_size
-        self.population_manager = PopulationManager(range_start, range_stop)
+        self.population_manager = population_manager
 
     @property
     def population(self) -> list[int]:
@@ -84,11 +84,12 @@ def get_sampler(
     args: argparse.Namespace,
 ) -> Union[ReplacementSampler, NonReplacementSampler]:
     sampler = None
+    population_manager = PopulationManager(args.start, args.stop)
     if args.non_replacement:
         sampler = NonReplacementSampler
     else:
         sampler = ReplacementSampler
-    return sampler(args.start, args.stop, args.size)
+    return sampler(population_manager, args.size)
 
 
 def get_sampled_frequency(
